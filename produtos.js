@@ -62,9 +62,24 @@ function apagarProduto(event) {
 		}, 305);
 }
 filtro.addEventListener("input", function(){
-		console.log(filtro.value);
-		var produtos= document.querySelectorAll(".produto");
+	console.log(filtro.value);
+	var produtos= document.querySelectorAll(".produto");
+	var busca = filtro.value;
+
+	produtos.forEach(function (produto){
+			var nome = produto.querySelector(".nome").textContent;
+			if (nome != busca){
+				produto.classList.add("invisivel");
+				//Esconder linha
+			} else {
+			    produto.classList.remove("invisivel");
+			    //Mostrar linha
+			}
+	});
+	// Caso a busca estiver vazia, mostre tds os produtos.
+	if (busca.lenght == 0){
 		produtos.forEach(function (produto){
-			console.log (produto.querySelector(".nome").textContent);
-		});
+			produto.classList.remove("invisivel");
+		});			
+	}
 });
