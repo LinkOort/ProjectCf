@@ -39,13 +39,16 @@ function criarBotao(cor, icone){
 	btn.appendChild(i);
 	btn.classList.add("btn", cor);
 	i.classList.add("fas", icone);
+	btn.addEventListener("click", apagarProduto)
 	return btn;
-
 }
 
 var btnApagar = document.querySelectorAll(".btn-apagar");
 btnApagar.forEach(function(botao) {
-	botao.addEventListener("click", function(event) {
+	botao.addEventListener("click", apagarProduto);
+});
+
+function apagarProduto(event) {
 		var linha 
 		if(event.target.hasChildNodes()) {
 			linha = event.target.parentNode.parentNode;
@@ -56,5 +59,4 @@ btnApagar.forEach(function(botao) {
 		setTimeout(function(){
 		linha.remove();	
 		}, 305);
-	});
-});
+	}
