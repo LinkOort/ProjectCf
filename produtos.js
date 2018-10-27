@@ -64,15 +64,16 @@ function apagarProduto(event) {
 filtro.addEventListener("input", function(){
 	console.log(filtro.value);
 	var produtos= document.querySelectorAll(".produto");
-	var busca = filtro.value;
+	var busca = filtro.value;	
+	var expressao = RegExp(busca, "i");
 
 	produtos.forEach(function (produto){
 			var nome = produto.querySelector(".nome").textContent;
-			if (nome != busca){
-				produto.classList.add("invisivel");
+			if (expressao.test(nome)){
+				produto.classList.remove("invisivel");
 				//Esconder linha
 			} else {
-			    produto.classList.remove("invisivel");
+			    produto.classList.add("invisivel");
 			    //Mostrar linha
 			}
 	});
