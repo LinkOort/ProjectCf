@@ -2,3 +2,6 @@
 	opacity: 0;
 	transition: 300ms;
 }
+.invisivel{
+	display: none;
+}
