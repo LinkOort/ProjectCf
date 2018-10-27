@@ -4,8 +4,10 @@ btnSalvar.addEventListener("click", function(event) {
 	event.preventDefault();
 
 	var tr = document.createElement("tr");
+	tr.classList.add("produto");
 	var tdFoto 	= document.createElement("td");
 	var tdNome 	= document.createElement("td");
+	tdNome.classList.add("nome");
 	var tdQtde 	= document.createElement("td");
 	var tdPreco = document.createElement("td");
 	var tdBotoes= document.createElement("td");
@@ -47,7 +49,6 @@ var btnApagar = document.querySelectorAll(".btn-apagar");
 btnApagar.forEach(function(botao) {
 	botao.addEventListener("click", apagarProduto);
 });
-
 function apagarProduto(event) {
 		var linha 
 		if(event.target.hasChildNodes()) {
@@ -59,4 +60,11 @@ function apagarProduto(event) {
 		setTimeout(function(){
 		linha.remove();	
 		}, 305);
-	}
+}
+filtro.addEventListener("input", function(){
+		console.log(filtro.value);
+		var produtos= document.querySelectorAll(".produto");
+		produtos.forEach(function (produto){
+			console.log (produto.querySelector(".nome").textContent);
+		});
+});
