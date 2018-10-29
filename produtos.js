@@ -28,6 +28,7 @@ btnSalvar.addEventListener("click", function(event) {
 	table.appendChild(tr);
 
 	var btnApagar = criarBotao("btn-danger", "fa-trash-alt");
+	btnApagar.addEventListener("click", apagarProduto);
 	var btnEditar = criarBotao("btn-primary", "fa-edit");
 	var btnCopiar = criarBotao("btn-warning", "fa-copy");
 	tdBotoes.appendChild(btnApagar);
@@ -41,7 +42,6 @@ function criarBotao(cor, icone){
 	btn.appendChild(i);
 	btn.classList.add("btn", cor);
 	i.classList.add("fas", icone);
-	btn.addEventListener("click", apagarProduto)
 	return btn;
 }
 
@@ -83,4 +83,18 @@ filtro.addEventListener("input", function(){
 			produto.classList.remove("invisivel");
 		});			
 	}
+});
+
+var btnEditar = document.querySelectorAll(".btn-editar");
+btnEditar.forEach(function(botao){
+	botao.addEventListener("click", function(event){
+		console.log("editar");
+var linha 
+	if(event.target.hasChildNodes()) {
+		linha = event.target.parentNode.parentNode;
+	} else {
+		linha = event.target.parentNode.parentNode.parentNode;
+		}
+		console.log(linha);
+	});
 });
