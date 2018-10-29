@@ -102,7 +102,9 @@ var linha
 		form.nome.value = nome;
 		form.qtde.value = qtde;
 		form.preco.value = preco;
-
 		console.log(nome);
+		btnSalvar.classList.add("invisivel");
+		btnConfirmar = criarBotao("btn-success", "fa-check")
+		form.appendChild(btnConfirmar);
 	});
 });
