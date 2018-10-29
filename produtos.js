@@ -1,6 +1,7 @@
-var linha;
 var btnConfirmar = criarBotao("btn-success", "fa-check");
+var linha;
 var btnSalvar = document.querySelector("#btnSalvar");
+var form = document.querySelector("#form-produto");
 btnSalvar.addEventListener("click", function(event) {
 	console.log("Saved");
 	event.preventDefault();
@@ -13,8 +14,6 @@ btnSalvar.addEventListener("click", function(event) {
 	var tdQtde 	= document.createElement("td");
 	var tdPreco = document.createElement("td");
 	var tdBotoes= document.createElement("td");
-
-	var form = document.querySelector("#form-produto");
 
 	tdNome.textContent = form.nome.value;
 	tdQtde.textContent = form.qtde.value;
@@ -98,11 +97,9 @@ var linha
 		var nome = linha.querySelector(".nome").textContent;
 		var qtde = linha.querySelector(".qtde").textContent;
 		var preco = linha.querySelector(".preco").textContent;
-		var form = document.querySelector("#form-produto");
 		form.nome.value = nome;
 		form.qtde.value = qtde;
 		form.preco.value = preco;
-		console.log(nome);
 		btnSalvar.classList.add("invisivel");
 		form.appendChild(btnConfirmar);
 	});
@@ -110,5 +107,16 @@ var linha
 
 btnConfirmar.addEventListener("click", function(event){
 	event.preventDefault();
-	console.log(linha);
+	
+	linha.querySelector(".nome").textContent = form.nome.value;
+	linha.querySelector(".qtde").textContent = form.qtde.value;
+	//substring
+	var p = form.preco.value
+	if (p.substring(0,2) == "R$")
+		linha.querySelector(".preco").textContent = p;
+	else 
+		linha.querySelector(".preco").textContent = "R$" + p;
+	
+	btnConfirmar.remove();
+	btnSalvar.classList.remove("invisivel");
 });
