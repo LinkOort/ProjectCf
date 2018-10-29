@@ -37,8 +37,8 @@ btnSalvar.addEventListener("click", function(event) {
 } );
 
 function criarBotao(cor, icone){
-	var i 	= document.createElement("i");
-	var btn 	= document.createElement("button");
+	var i = document.createElement("i");
+	var btn = document.createElement("button");
 	btn.appendChild(i);
 	btn.classList.add("btn", cor);
 	i.classList.add("fas", icone);
@@ -88,13 +88,21 @@ filtro.addEventListener("input", function(){
 var btnEditar = document.querySelectorAll(".btn-editar");
 btnEditar.forEach(function(botao){
 	botao.addEventListener("click", function(event){
-		console.log("editar");
 var linha 
 	if(event.target.hasChildNodes()) {
 		linha = event.target.parentNode.parentNode;
 	} else {
 		linha = event.target.parentNode.parentNode.parentNode;
 		}
-		console.log(linha);
+		var nome = linha.querySelector(".nome").textContent;
+		var qtde = linha.querySelector(".qtde").textContent;
+		var preco = linha.querySelector(".preco").textContent;
+		
+		var form = document.querySelector("#form-produto");
+		form.nome.value = nome;
+		form.qtde.value = qtde;
+		form.preco.value = preco;
+
+		console.log(nome);
 	});
 });
