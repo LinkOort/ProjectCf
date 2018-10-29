@@ -1,3 +1,5 @@
+var linha;
+var btnConfirmar = criarBotao("btn-success", "fa-check");
 var btnSalvar = document.querySelector("#btnSalvar");
 btnSalvar.addEventListener("click", function(event) {
 	console.log("Saved");
@@ -26,7 +28,6 @@ btnSalvar.addEventListener("click", function(event) {
 
 	var table = document.querySelector("#table");
 	table.appendChild(tr);
-
 	var btnApagar = criarBotao("btn-danger", "fa-trash-alt");
 	btnApagar.addEventListener("click", apagarProduto);
 	var btnEditar = criarBotao("btn-primary", "fa-edit");
@@ -97,14 +98,17 @@ var linha
 		var nome = linha.querySelector(".nome").textContent;
 		var qtde = linha.querySelector(".qtde").textContent;
 		var preco = linha.querySelector(".preco").textContent;
-		
 		var form = document.querySelector("#form-produto");
 		form.nome.value = nome;
 		form.qtde.value = qtde;
 		form.preco.value = preco;
 		console.log(nome);
 		btnSalvar.classList.add("invisivel");
-		btnConfirmar = criarBotao("btn-success", "fa-check")
 		form.appendChild(btnConfirmar);
 	});
+});
+
+btnConfirmar.addEventListener("click", function(event){
+	event.preventDefault();
+	console.log(linha);
 });
