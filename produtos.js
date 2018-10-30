@@ -87,8 +87,10 @@ filtro.addEventListener("input", function(){
 
 var btnEditar = document.querySelectorAll(".btn-editar");
 btnEditar.forEach(function(botao){
-	botao.addEventListener("click", function(event){
-var linha 
+	botao.addEventListener("click", editarProduto);
+});
+
+function editarProduto(event){
 	if(event.target.hasChildNodes()) {
 		linha = event.target.parentNode.parentNode;
 	} else {
@@ -102,8 +104,7 @@ var linha
 		form.preco.value = preco;
 		btnSalvar.classList.add("invisivel");
 		form.appendChild(btnConfirmar);
-	});
-});
+}
 
 btnConfirmar.addEventListener("click", function(event){
 	event.preventDefault();
