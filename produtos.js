@@ -2,18 +2,24 @@ var btnConfirmar = criarBotao("btn-success", "fa-check");
 var linha;
 var btnSalvar = document.querySelector("#btnSalvar");
 var form = document.querySelector("#form-produto");
+
+localStorage.setItem("nome", "Coxinha");
+
 btnSalvar.addEventListener("click", function(event) {
-	console.log("Saved");
 	event.preventDefault();
 
 	var tr = document.createElement("tr");
 	tr.classList.add("produto");
 	var tdFoto 	= document.createElement("td");
+	tdFoto.classList.add("foto");
 	var tdNome 	= document.createElement("td");
 	tdNome.classList.add("nome");
 	var tdQtde 	= document.createElement("td");
+	tdQtde.classList.add("quantidade");
 	var tdPreco = document.createElement("td");
+	tdPreco.classList.add("preco");
 	var tdBotoes= document.createElement("td");
+	tdBotoes.classList.add("botao");
 
 	tdNome.textContent = form.nome.value;
 	tdQtde.textContent = form.qtde.value;
@@ -121,3 +127,5 @@ btnConfirmar.addEventListener("click", function(event){
 	btnConfirmar.remove();
 	btnSalvar.classList.remove("invisivel");
 });
+
+//Salvar o nome dos produtos;
