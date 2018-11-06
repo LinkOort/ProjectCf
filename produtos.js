@@ -3,27 +3,21 @@ var linha;
 var btnSalvar = document.querySelector("#btnSalvar");
 var form = document.querySelector("#form-produto");
 
-localStorage.setItem("nome", "Coxinha");
-
-btnSalvar.addEventListener("click", function(event) {
-	event.preventDefault();
-
+function criarLinha(nome, qtde, preco){
 	var tr = document.createElement("tr");
 	tr.classList.add("produto");
 	var tdFoto 	= document.createElement("td");
-	tdFoto.classList.add("foto");
 	var tdNome 	= document.createElement("td");
 	tdNome.classList.add("nome");
 	var tdQtde 	= document.createElement("td");
-	tdQtde.classList.add("quantidade");
+	tdQtde.classList.add("qtde");
 	var tdPreco = document.createElement("td");
 	tdPreco.classList.add("preco");
 	var tdBotoes= document.createElement("td");
-	tdBotoes.classList.add("botao");
 
-	tdNome.textContent = form.nome.value;
-	tdQtde.textContent = form.qtde.value;
-	tdPreco.textContent = "R$ " + form.preco.value;
+	tdNome.textContent = nome;
+	tdQtde.textContent = qtde;
+	tdPreco.textContent = "R$" + preco;
 
 	tr.appendChild(tdFoto);
 	tr.appendChild(tdNome);
@@ -40,7 +34,14 @@ btnSalvar.addEventListener("click", function(event) {
 	tdBotoes.appendChild(btnApagar);
 	tdBotoes.appendChild(btnEditar);
 	tdBotoes.appendChild(btnCopiar);
-} );
+}
+
+btnSalvar.addEventListener("click", function(event) {
+	event.preventDefault();
+	criarLinha(form.nome.value, form.qtde.value, form.preco.value);
+	localStorage.setItem("nome", form.nome.value);
+	//GgetItem busca o item
+});
 
 function criarBotao(cor, icone){
 	var i = document.createElement("i");
@@ -90,12 +91,10 @@ filtro.addEventListener("input", function(){
 		});			
 	}
 });
-
 var btnEditar = document.querySelectorAll(".btn-editar");
 btnEditar.forEach(function(botao){
 	botao.addEventListener("click", editarProduto);
 });
-
 function editarProduto(event){
 	if(event.target.hasChildNodes()) {
 		linha = event.target.parentNode.parentNode;
@@ -111,10 +110,8 @@ function editarProduto(event){
 		btnSalvar.classList.add("invisivel");
 		form.appendChild(btnConfirmar);
 }
-
 btnConfirmar.addEventListener("click", function(event){
 	event.preventDefault();
-	
 	linha.querySelector(".nome").textContent = form.nome.value;
 	linha.querySelector(".qtde").textContent = form.qtde.value;
 	//substring
@@ -123,7 +120,6 @@ btnConfirmar.addEventListener("click", function(event){
 		linha.querySelector(".preco").textContent = p;
 	else 
 		linha.querySelector(".preco").textContent = "R$" + p;
-	
 	btnConfirmar.remove();
 	btnSalvar.classList.remove("invisivel");
 });
