@@ -1,11 +1,12 @@
 var btnConfirmar = criarBotao("btn-success", "fa-check");
 var linha;
-var btnSalvar = document.querySelector("#btnSalvar");
+
 var form = document.querySelector("#form-produto");
 
-function criarLinha(nome, qtde, preco){
+function criarLinha(nome, qtde, preco, id){
 	var tr = document.createElement("tr");
 	tr.classList.add("produto");
+	tr.id = id;
 	var tdFoto 	= document.createElement("td");
 	var tdNome 	= document.createElement("td");
 	tdNome.classList.add("nome");
@@ -29,18 +30,23 @@ function criarLinha(nome, qtde, preco){
 	table.appendChild(tr);
 	var btnApagar = criarBotao("btn-danger", "fa-trash-alt");
 	btnApagar.addEventListener("click", apagarProduto);
+	btnApagar.classList.add("btn-apagar");	
 	var btnEditar = criarBotao("btn-primary", "fa-edit");
+	btnEditar.addEventListener("click", editarProduto);
+	btnEditar.classList.add("btn-editar");
 	var btnCopiar = criarBotao("btn-warning", "fa-copy");
 	tdBotoes.appendChild(btnApagar);
 	tdBotoes.appendChild(btnEditar);
 	tdBotoes.appendChild(btnCopiar);
 }
-
+var btnSalvar = document.querySelector("#btnSalvar");
 btnSalvar.addEventListener("click", function(event) {
 	event.preventDefault();
-	criarLinha(form.nome.value, form.qtde.value, form.preco.value);
-	localStorage.setItem("nome", form.nome.value);
-	//GgetItem busca o item
+	criarLinha(form.nome.value, form.qtde.value, form.preco.value, localStorage.length/3 + 1);
+	indice = (localStorage.length/3) + 1
+	localStorage.setItem("nome_" + indice, form.nome.value);
+	localStorage.setItem("qtde_" + indice, form.qtde.value);
+	localStorage.setItem("preco_" + indice, form.preco.value);
 });
 
 function criarBotao(cor, icone){
@@ -51,7 +57,6 @@ function criarBotao(cor, icone){
 	i.classList.add("fas", icone);
 	return btn;
 }
-
 var btnApagar = document.querySelectorAll(".btn-apagar");
 btnApagar.forEach(function(botao) {
 	botao.addEventListener("click", apagarProduto);
@@ -64,6 +69,10 @@ function apagarProduto(event) {
 			linha = event.target.parentNode.parentNode.parentNode;
 		}
 		linha.classList.add("fade-out");
+		var indice = linha.id;
+		localStorage.removeItem("nome_" + indice);
+		localStorage.removeItem("qtde_" + indice);
+		localStorage.removeItem("preco_" + indice);
 		setTimeout(function(){
 		linha.remove();	
 		}, 305);
@@ -100,7 +109,7 @@ function editarProduto(event){
 		linha = event.target.parentNode.parentNode;
 	} else {
 		linha = event.target.parentNode.parentNode.parentNode;
-		}
+	}
 		var nome = linha.querySelector(".nome").textContent;
 		var qtde = linha.querySelector(".qtde").textContent;
 		var preco = linha.querySelector(".preco").textContent;
@@ -124,4 +133,9 @@ btnConfirmar.addEventListener("click", function(event){
 	btnSalvar.classList.remove("invisivel");
 });
 
-//Salvar o nome dos produtos;
+for(var i=1; i<=(localStorage.length/3); i++ )
+criarLinha(
+	localStorage.getItem("nome_"+i), 
+	localStorage.getItem("qtde_"+i), 
+	localStorage.getItem("preco_"+i),
+	i);
